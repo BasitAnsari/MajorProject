@@ -5,6 +5,7 @@ import requests
 # from transformers import pipeline
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.core.cache import cache
 
 # Create your views here.
 
@@ -31,4 +32,5 @@ def summary(request):
     summary = query({
 	"inputs": text,
     }) 
+    cache.set(link,summary[0])
     return Response (summary[0])

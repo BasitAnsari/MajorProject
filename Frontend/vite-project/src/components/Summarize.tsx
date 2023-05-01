@@ -1,8 +1,10 @@
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import React, { useEffect, useState } from 'react'
 
 export const Summarize = (link) => {
     const [summarizing, setSummarizing] = useState(true)
     const [summary, setSummary] = useState(null)
+    const [animationParent] = useAutoAnimate()
     useEffect(() => {
         const fetchSummary = async (link) => {
             const options = { 
@@ -13,19 +15,26 @@ export const Summarize = (link) => {
                   // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
               }
-              const summaryRequest = await fetch('http://127.0.0.1:8000/api/summarizer/',options)
-              const summary = await summaryRequest.json()
-              setSummary(summary.summary_text)
-              setSummarizing(false)
+                const summaryRequest = await fetch('http://127.0.0.1:8000/api/summarizer/',options)
+                const summary = await summaryRequest.json()
+                setSummary(summary.summary_text)
+                // setTimeout('', 5000);
+                setSummarizing(false)
         }
-        fetchSummary(link)
+        setTimeout(()=>fetchSummary(link), 5000);
     }, [])
   return (
-    <div className='row justify-content-center p-4 rounded'>
-                    <div className="col-12 loadingItem justify-content-center align-items-center d-flex">
-                        {summarizing ? <h3 className='d-inline'>Summarizing.....</h3> : <p>{summary}</p>}
-                    
+    // <div className='row justify-content-center p-4 rounded'>
+                    <div className="col-md-3 m-3 loadingItem justify-content-center align-items-center d-flex" ref={animationParent}>
+                        {summarizing ? <h3 className='d-inline'>Summarizing.....</h3> : 
+                        <div>
+                          <p>
+                          {summary}
+                          </p>
+                          <a href={link.link} className='btn btn-outline-light rounded'>Source</a>
+                          </div>}
+
                     </div>
-                    </div>
+                    // </div>
   )
 }

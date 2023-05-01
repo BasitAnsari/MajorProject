@@ -4,10 +4,15 @@ body{
 }
 .loadingItem{
   max-width: 60%; 
-  height: 10vh;
-  border: 1px solid rgba(255, 255, 255, 0);
-  box-shadow: 0px 0px 13px 1px #FF3D00;
-
+  height: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* box-shadow: 0px 0px 13px 1px rgba(255, 255, 255, 0.47); */
+}
+.loadingItem:hover{
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 .myContainer{
   height: 100vh;
@@ -103,4 +108,11 @@ body{
     transform: translate(-50%, 15px);
     opacity: 0;
   }
+}
+.navbar-brand{
+  color: white;
+}:hover{
+  color: white;
+}:focus{
+  color: white;
 }
